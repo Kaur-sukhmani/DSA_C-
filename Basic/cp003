@@ -1,0 +1,26 @@
+// swapping between 2 numbers 
+#include<stdio.h>
+int main(){
+    int a , b, temp;
+    // take input
+    // printf("\n the value of a=");
+    // scanf("%d", &a);
+
+    // printf("\n the value of b=");
+    // scanf("%d", &b);
+
+    // printf("\n the 2 values before swapping:%d %d", a, b);
+    
+    // temp = a;
+    // a = b;
+    // b = temp;
+    // printf("\n 2 numbers after swapping: %d %d", a , b);
+    int rno;
+    char name[20];
+    char add[10];
+    char Gender ;
+    float fees;
+    scanf("%d %s %s %c %f", &rno, name, add, &Gender, &fees);
+    printf("%d %s %s %c %f", rno, name, add, Gender, fees);
+    return 0;
+}
