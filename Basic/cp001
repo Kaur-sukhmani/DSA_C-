@@ -1,0 +1,13 @@
+// program to add two numbers 
+#include<stdio.h>
+int main(){
+    int a, b, c;
+    // intiazialing early only
+    a = 10;
+    b = 20;
+    c = a+b;
+    printf("\n value of a = %d", a);
+    printf("\n value of b = %d", b);
+    printf("\n Sum = %d", c);
+    return 0;
+}
