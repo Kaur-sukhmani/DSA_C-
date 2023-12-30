@@ -1,0 +1,21 @@
+// writing the simple interest formula 
+#include<stdio.h>
+int main(){
+    float principal, rate, time;
+    float simple_intrest;
+    printf("\n value of p= ");
+    scanf("%f", &principal);
+
+    printf("\n value of r= ");
+    scanf("%f", &rate);
+
+    printf("\n value of t= ");
+    scanf("%f", &time);
+
+
+    simple_intrest = (principal*rate*time)/100;
+    printf("\n the value of the simple interest is -> %f", simple_intrest);
+    return 0 ;
+
+
+}
