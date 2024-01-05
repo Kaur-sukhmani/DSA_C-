@@ -1,0 +1,75 @@
+// Search in Rotated Sorted Array
+// https://leetcode.com/problems/search-in-rotated-sorted-array/
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int getPivot(vector<int>& nums, int n) {
+        int beg = 0;
+        int end = n - 1;
+        while (beg < end) {
+            int mid = beg + (end - beg) / 2;
+            if (nums[mid] >= nums[0]) {
+                beg = mid + 1;
+            } else {
+                end = mid;
+            }
+        }
+        return beg;
+    }
+
+    int binary_search(vector<int>& nums, int start, int ending, int key) {
+        int beg = start;
+        int end = ending;
+        while (beg <= end) {
+            int mid = beg + (end - beg) / 2;
+            if (nums[mid] == key) {
+                return mid;
+            } 
+            else if (nums[mid] > key) {
+                end = mid - 1;
+            } else {
+                beg = mid + 1;
+            }
+        }
+        return -1;
+    }
+
+    int search(vector<int>& nums, int target) {
+        int n = nums.size();
+        int pivot = getPivot(nums, n);
+        if (target >= nums[pivot] && target <=nums[n-1]) 
+        {
+            //BS on second line
+            return binary_search(nums, pivot, n - 1, target);
+        } 
+        else 
+        {//BS on first line
+            return binary_search(nums, 0, pivot - 1, target);
+        }
+    }
+};
+
+
+int main() {
+    Solution sol;
+
+    // Example 1
+    vector<int> nums1;
+    int target1 = 0;
+    cout << "Search for " << target1 << " in nums1: " << sol.search(nums1, target1) << endl;
+
+    // Example 2
+    vector<int> nums2 ;
+    int target2 = 3;
+    cout << "Search for " << target2 << " in nums2: " << sol.search(nums2, target2) << endl;
+
+    // Example 3
+    vector<int> nums3;
+    int target3 = 0;
+    cout << "Search for " << target3 << " in nums3: " << sol.search(nums3, target3) << endl;
+
+    return 0;
+}
