@@ -1,0 +1,23 @@
+// GET PIVOT 
+#include <iostream>
+#include <vector>
+using namespace std;
+int getPivot(int arr[],int n){
+    int beg=0;
+    int end=n-1;
+    while(beg<=end){
+        int mid=beg+(end-beg)/2;
+        if(arr[mid]>arr[0]){
+            beg=mid+1;
+        }
+        else{
+            end=mid;
+        }
+    }
+    return beg;
+}
+int main(){
+    int arr[5]={3,8,10,17,1};
+    cout<<"pivot is "<<getPivot(arr,5);
+    return 0;
+}
