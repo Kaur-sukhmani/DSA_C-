@@ -1,0 +1,47 @@
+// - Find Square Root of an Integer only integer value  using Binary Search
+// https://leetcode.com/problems/sqrtx/
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+class Solution {
+public:
+    long long int binarySearch(int x){
+// using binary search ->O(logn)
+        int beg=0;
+        int end=x;
+        long long int ans=-1;
+        while(beg<=end){
+            long long int mid=beg+(end-beg)/2;
+            if(pow(mid,2) == x){
+                return mid;
+            }
+            else if(pow(mid,2) > x){
+                end=mid-1;
+            }
+            else{
+                ans=mid;
+                beg=mid+1;
+            }
+        }
+        return  ans;
+    }
+
+    int mySqrt(int x) {
+        return binarySearch(x);
+    }
+    
+};
+
+int main() {
+    Solution sol;
+
+    // Test cases
+    cout << "The square root of 4 is: " << sol.mySqrt(4) << endl;
+    cout << "The square root of 8 is: " << sol.mySqrt(8) << endl;
+    cout << "The square root of 16 is: " << sol.mySqrt(16) << endl;
+    cout << "The square root of 25 is: " << sol.mySqrt(25) << endl;
+    cout << "The square root of 26 is: " << sol.mySqrt(26) << endl;
+
+    return 0;
+}
