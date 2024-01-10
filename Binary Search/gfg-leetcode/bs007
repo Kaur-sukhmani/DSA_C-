@@ -1,0 +1,49 @@
+// Find Square Root of an Integer[both int & floating part] using Binary Search
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+long long int sqrtInteger(int x){
+// using binary search ->O(logn)
+        int beg=0;
+        int end=x;
+        long long int ans=-1;
+        while(beg<=end){
+            long long int mid=beg+(end-beg)/2;
+            if(pow(mid,2) == x){
+                return mid;
+            }
+            else if(pow(mid,2) > x){
+                end=mid-1;
+            }
+            else{
+                ans=mid;
+                beg=mid+1;
+            }
+        }
+        return  ans;
+    }
+
+double morePrecision(int n, int precision , int tempSol){
+
+    double factor =1;
+    double ans = tempSol;
+
+    for(int i=0;i<precision;i++){
+        factor=factor/10;
+
+        for(double j=ans; j*j<n; j=j+factor){
+            ans=j;
+        }
+    }
+    return ans;
+}
+int main(){
+    int n;
+    cout<<"Enter any numbe:";
+    cin>>n;
+
+    int tempSol = sqrtInteger(n);
+    cout<<"Answer is"<< morePrecision(n,3,tempSol)<<endl;
+    return 0;
+}
