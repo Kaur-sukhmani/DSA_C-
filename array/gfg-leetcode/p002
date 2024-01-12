@@ -1,0 +1,76 @@
+// Rotate Array
+// https://leetcode.com/problems/rotate-array/
+
+// optimal solution ->
+// Example:-1234567 ,k=3
+// 1.first reverse the numbers form index 0 to n-k;
+// ->4321 567
+// 2.reverse the k elements from the last
+// ->4321 765
+// 3.now reverse the whole nums;
+// ->5671234 Done Answer is here !!!!
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        k = k % n; // Adjust k if it's greater than n
+
+        // Using temporary vector
+        vector<int> temp(n);
+        for (int i = 0; i < k; ++i) {
+            temp[i] = nums[n - k + i];
+        }
+        for (int i = k; i < n; ++i) {
+            temp[i] = nums[i - k];
+        }
+        nums = temp; // Copy back to nums
+    }
+
+    void rotateEfficient(vector<int>& nums, int k) {
+        int n = nums.size();
+        k = k % n; // Adjust k if it's greater than n
+
+        // Using reverse
+        reverse(nums.begin(), nums.end());
+        reverse(nums.begin(), nums.begin() + k);
+        reverse(nums.begin() + k, nums.end());
+    }
+};
+
+int main() {
+    Solution sol;
+
+    vector<int> nums;
+    int k = 3;
+
+    cout << "Original array: ";
+    for (int num : nums) {
+        cout << num << " ";
+    }
+    cout << "\n";
+
+    // Using the first method
+    sol.rotate(nums, k);
+    cout << "Rotated array (method 1): ";
+    for (int num : nums) {
+        cout << num << " ";
+    }
+    cout << "\n";
+
+    // Resetting the array to its original state
+
+    // Using the efficient method
+    sol.rotateEfficient(nums, k);
+    cout << "Rotated array (efficient method): ";
+    for (int num : nums) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
