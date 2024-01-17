@@ -1,0 +1,87 @@
+//  Majority Element
+// https://leetcode.com/problems/majority-element/
+// https://takeuforward.org/data-structure/find-the-majority-element-that-occurs-more-than-n-2-times/
+// Given an array nums of size n, return the majority element.
+
+// The majority element is the element that appears more than ⌊n / 2⌋ times
+
+// 3 SOLUTIONS
+// 1st solution/Naive Approach:  
+// check each and every element and compare
+#include <bits/stdc++.h>
+using namespace std;
+int majorityElement(vector<int> v) {
+    int n =v.size();
+    for(int i=0;i<n;i++){
+        int count=0;
+
+        // selected element is v[i]
+        for(int j=i;i<n-1;j++){
+            // counting the frequency of v[i]
+            if(v[i]==v[j]){
+                count++;
+            }
+        }
+
+        // check if frequency is greater than n/2:
+        if(count>n/2){
+            return v[i];
+        }
+    }
+    return -1;
+}
+// TIME complexity -> O(N^2)
+int majorityElementMethod2(vector<int> v){
+    map<int,int> mp;
+    for(int i=0;i<v.size();i++){
+        mp[v[i]]++;
+    }
+    for(auto it:mp){
+        if(it.second>(v.size())/2){
+            return it.first;
+        }
+    }
+    return -1;
+}
+// Time Complexity: O(N*logN) + O(N), where N = size of the given array.
+// Space Complexity: O(N) as we are using a map data structure.
+int majorityElementMethod3(vector<int> v) {
+
+    //size of the given array:
+    int n = v.size();
+    int cnt = 0; // count
+    int el; // Element
+
+    //applying the algorithm:
+    for (int i = 0; i < n; i++) {
+        if (cnt == 0) {
+            cnt = 1;
+            el = v[i];
+        }
+        else if (el == v[i]) cnt++;
+        else cnt--;
+    }
+
+    //checking if the stored element
+    // is the majority element:
+    int cnt1 = 0;
+    for (int i = 0; i < n; i++) {
+        if (v[i] == el) cnt1++;
+    }
+
+    if (cnt1 > (n / 2)) return el;
+    return -1;
+}
+// Time Complexity: O(N) + O(N), where N = size of the given array.
+// Space Complexity: O(1) as we are not using any extra space.
+
+int main()
+{
+    // vector<int> arr = {2, 2, 1, 1, 1, 2, 2};v
+    vector<int> arr;
+    int ans = majorityElement(arr);
+    cout << "The majority element is: " << ans << endl;
+    int ans1 = majorityElementMethod2(arr);
+    cout << "The majority element is: " << ans1 << endl;
+    return 0;
+}
