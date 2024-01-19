@@ -1,0 +1,38 @@
+// Power of Two
+// Given an integer n, return true if it is a power of two. Otherwise, return false.
+
+// An integer n is a power of two, if there exists an integer x such that n == 2x.
+// https://leetcode.com/problems/power-of-two/description/
+#include <iostream>
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        // Check for non-positive integers
+        if (n <= 0) {
+            return false;
+        }
+
+        // Count the number of 1-bits
+        int count = __builtin_popcount(n);
+
+        // A number is a power of two if it has exactly one 1-bit
+        return count == 1;
+    }
+};
+
+int main() {
+    Solution solution;
+    int n;
+
+    std::cout << "Enter an integer: ";
+    std::cin >> n;
+
+    if (solution.isPowerOfTwo(n)) {
+        std::cout << n << " is a power of two." << std::endl;
+    } else {
+        std::cout << n << " is not a power of two." << std::endl;
+    }
+
+    return 0;
+}
