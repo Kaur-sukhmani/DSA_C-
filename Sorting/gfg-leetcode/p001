@@ -1,0 +1,73 @@
+// Sort Integers by The Number of 1 Bits
+// https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/description/
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    static bool cmp(int a, int b) {
+        int p = __builtin_popcount(a);
+        int q = __builtin_popcount(b);
+        if (p == q) {
+            return (a <= b);
+        } else {
+            return (p < q);
+        }
+    }
+
+    vector<int> sortByBits(vector<int>& arr) {
+        sort(arr.begin(), arr.end(), cmp);
+        return arr;
+    }
+};
+
+int main() {
+    Solution sol;
+    vector<int> arr;
+
+    cout << "Original array: ";
+    for (int num : arr) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    vector<int> sortedArr = sol.sortByBits(arr);
+
+    cout << "Sorted by bits: ";
+    for (int num : sortedArr) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
+
+//     static bool comp(const pair<int,int> p1,const pair<int,int> p2){
+//         if(p1.second!=p2.second){
+//             return p1.second < p2.second;
+//         }
+//         return p1.first < p2.first;
+//     }
+//     vector<int> sortByBits(vector<int>& arr) {
+//         vector<int> ans;
+//         int n=arr.size();
+//         unordered_map<int,int> mp;
+//         for(int i=0;i<arr.size();i++){
+//             int count = __builtin_popcount(arr[i]);
+//             mp[arr[i]]=count;
+//         }
+//         vector<pair<int,int>> vect;
+//         //copy all elements of mp into pair of vector
+//         for(int i=0;i<n;i++){
+//             vect.push_back({arr[i],mp[arr[i]]});
+//         }
+//         sort(vect.begin(),vect.end(),comp);
+
+//         for(int i=0;i<arr.size();i++){
+//             ans.push_back(vect[i].first);
+//         }
+//         return ans;
+//     }
+// };
