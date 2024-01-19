@@ -1,0 +1,57 @@
+// Find All Duplicates in an Array
+// time comlexity-> O(n)
+//space complex ->O(1)
+// https://leetcode.com/problems/find-all-duplicates-in-an-array/
+#include<iostream>
+using namespace std;
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+         vector<int>ans;
+
+        // make the numbers negative and simulteneously check for the negative number i.e Duplicate number
+
+        for(int i = 0;i<nums.size();i++){
+            int num = abs(nums[i]);
+
+            if(nums[num - 1]<1){
+                ans.push_back(num);
+            }
+
+            nums[num-1] = nums[num-1] * (-1);
+        }
+
+        return ans;
+    }
+};
+//  Solution 3 : Make the present numbers negative if we get again negative number then that number is duplicate 
+// The range is : 1 <= nums[i] <= n
+
+    // vector<int>Solution3(vector<int>nums){
+    //     vector<int>ans;
+
+    //     // make the numbers negative and simulteneously check for the negative number i.e Duplicate number
+
+    //     for(int i = 0;i<nums.size();i++){
+    //         int num = abs(nums[i]);
+
+    //         if(nums[num - 1]<1){
+    //             ans.push_back(num);
+    //         }
+
+    //         nums[num-1] = nums[num-1] * (-1);
+    //     }
+
+    //     return ans;
+    // }
+
+    // /*
+    //     Analysis:
+    //     Time Cpomplexity : O(n)
+    //     Space Compleity : O(1)
+    // */    
+
+    // vector<int> findDuplicates(vector<int>& nums) {
+    //     return Solution3(nums);
+    // }
+// int main(){}
