@@ -1,0 +1,37 @@
+// find the unique element in an array
+#include<iostream>
+using namespace std;
+//if k =2(k is the number of times the element is present)
+int findUnique(int *arr, int size)
+{
+    //Write your code here
+    int ans=0;
+    for(int i=0;i<size;i++){
+        ans=ans^arr[i];
+    }
+    return ans;
+}
+// if k(is any number
+int findUnique(int a[], int n, int k) {
+        sort(a , a+n);
+          
+          for(int i=0; i<n; i=i+k){
+              if(a[i] != a[i+k-1]){
+                  return a[i];
+              }
+          }
+          return -1;
+}
+// https://www.geeksforgeeks.org/problems/find-unique-element2632/1
+// https://www.codingninjas.com/studio/problems/find-unique_625159?source=youtube&campaign=love_babbar_codestudio1&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_codestudio1&leftPanelTabValue=SUBMISSION
+void printArray(int arr[],int size){
+    for(int i=0;i<size;i++){
+        cout<<arr[i]<<"\t";
+    }
+}
+int main(){
+    int arr[5]={1,3,4,1,3};
+    findUnique(arr,5);
+    printArray(arr,5);
+    return 0;
+}
