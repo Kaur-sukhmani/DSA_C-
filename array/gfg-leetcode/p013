@@ -1,0 +1,51 @@
+// Pair Sum
+// Problem statement
+//""" You are given an integer array 'ARR' of size 'N' and an integer 'S'. Your task is to return the list of all pairs of elements such that each sum of elements of each pair equals 'S'.
+//noted
+
+// Each pair should be sorted i.e the first value should be less than or equals to the second value. 
+
+// Return the list of pairs sorted in non-decreasing order of their first value. In case if two pairs have the same first value, the pair with a smaller second value should come first."""
+// https://leetcode.com/problems/two-sum/
+// https://www.codingninjas.com/studio/problems/pair-sum_697295?leftPanelTabValue=SUBMISSION
+
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<vector<int>> pairSum(vector<int> &arr, int s){
+   vector<vector<int>> ans;
+   for(int i = 0; i < arr.size(); i++){
+       for(int j = i + 1; j < arr.size(); j++){ // Corrected here
+           if (arr[i] + arr[j] == s) {
+               vector<int> temp;
+               temp.push_back(min(arr[i], arr[j]));
+               temp.push_back(max(arr[i], arr[j]));
+               ans.push_back(temp);
+           }
+       }
+   }
+   sort(ans.begin(), ans.end());
+   return ans;
+}
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,int> mp;
+        vector<int> ans;
+        vector<int> returning;
+        int n=nums.size();
+        for(int i=0;i<n;i++){
+            if(mp.find(target-nums[i])!=mp.end()){
+                //agar hmilgya 
+                ans.push_back(min(mp[target-nums[i]],i));
+                ans.push_back(max(mp[target-nums[i]],i));
+                return ans;
+            }
+            else{
+                mp[nums[i]]= i;
+            }
+        }
+        return {};
+    }
+};
