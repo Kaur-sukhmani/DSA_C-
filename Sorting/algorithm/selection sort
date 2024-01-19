@@ -1,0 +1,42 @@
+// selection sort
+// https://leetcode.com/problems/sort-an-array/description/
+// https://www.geeksforgeeks.org/problems/bubble-sort/1?utm_source=geeksforgeeks&utm_medium=article_practice_tab&utm_campaign=article_practice_tab
+
+#include <iostream>
+#include <vector>
+using namespace std;
+class Solution {
+public:
+    void sortArray(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> sortedArray(n,0);
+        for(int i=0;i<n;i++){
+            int mini=i;
+            for(int j=i+1;j<n;j++){
+                if(nums[j]<nums[mini]){
+                    mini=j;
+                }
+            }
+            swap(nums[i],nums[mini]);
+        }
+    }
+};
+int main() {
+    Solution sol;
+    vector<int> nums;
+    
+    cout << "Original Array: ";
+    for (int num : nums) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    sol.sortArray(nums);
+
+    cout << "Sorted Array: ";
+    for (int num : nums) {
+        cout << num << " ";
+    }
+
+    return 0;
+}
