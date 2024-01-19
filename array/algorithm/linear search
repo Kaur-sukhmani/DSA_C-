@@ -1,0 +1,32 @@
+//Linear search
+#include<iostream>
+using namespace std;
+
+bool search(int arr[], int size,int key){
+    for(int i=0;i<size;i++){
+        if(arr[i]==key){
+            return true;
+        }
+    }
+    return 0;
+}
+int main(){
+    int key;
+    cout<<"Enter the key";
+    cin>>key;
+
+    int arr[10]={12,23,54,67,343,45,56,45,34,45};
+
+    bool found = search(arr,10,key);
+
+    if(found){
+        cout<<"Element found"<<endl;
+    }
+    else{
+        cout<<"Element not found"<<endl;
+    }
+
+
+    return 0;
+
+}
