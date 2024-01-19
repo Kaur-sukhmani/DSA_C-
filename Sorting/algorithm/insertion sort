@@ -1,0 +1,49 @@
+// https://www.geeksforgeeks.org/problems/insertion-sort/1
+#include <iostream>
+using namespace std;
+
+class Solution {
+    public:
+    void insert(int arr[], int i) {
+        // Implementation not provided
+    }
+
+    public:
+    void insertionSort(int arr[], int n) {
+        for(int i = 1; i < n; i++) {
+            int temp = arr[i];
+            int j;
+            for(j = i - 1; j >= 0; j--) {
+                if(arr[j] > temp) {
+                    arr[j + 1] = arr[j];
+                } else {
+                    break;
+                }
+            }
+            arr[j + 1] = temp;
+        }
+    }
+};
+
+int main() {
+    Solution sol;
+    
+    int arr[] = {5, 3, 4, 1, 2};
+    int n = sizeof(arr)/sizeof(arr[0]);
+
+    cout << "Original array:\n";
+    for(int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << "\n";
+
+    sol.insertionSort(arr, n);
+
+    cout << "Sorted array:\n";
+    for(int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << "\n";
+
+    return 0;
+}
