@@ -1,0 +1,54 @@
+// Sort Integers by The Number of 1 Bits by not using the builtin function 
+// https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/description/
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public: 
+    static int countBit(int n) {
+        int cnt = 0;
+        while(n) {
+            n = n & (n - 1);
+            cnt++;
+        }
+        return cnt;
+    }
+
+    static bool comp(int x, int y) {   
+        int bitCountX = countBit(x);
+        int bitCountY = countBit(y);
+        
+        if (bitCountX == bitCountY) 
+            return x < y;
+
+        return bitCountX < bitCountY;
+    }
+    
+    vector<int> sortByBits(vector<int>& arr) {
+        sort(arr.begin(), arr.end(), comp);
+        return arr;
+    }
+};
+
+int main() {
+    Solution solution;
+    vector<int> arr ;
+// = {0, 1, 2, 3, 4, 5, 6, 7, 8}
+    cout << "Original Array: ";
+    for (int num : arr) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    vector<int> sortedArr = solution.sortByBits(arr);
+
+    cout << "Sorted by Bits: ";
+    for (int num : sortedArr) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
