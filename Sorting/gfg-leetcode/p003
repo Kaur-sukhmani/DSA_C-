@@ -1,0 +1,39 @@
+// c
+// https://www.geeksforgeeks.org/problems/minimum-swaps/1
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int minSwaps(vector<int>& nums) {
+        int count = 0;
+        int n = nums.size();
+        vector<pair<int,int>> vect(n);
+        for(int i = 0; i < n; i++) {
+            vect[i] = {nums[i], i};
+        }
+        sort(vect.begin(), vect.end());
+        for(int i = 0; i < n; i++) {
+            if(vect[i].second == i) {
+                continue;
+            } else {
+                count++;
+                swap(vect[i], vect[vect[i].second]);
+                i--;
+            }
+        }
+        return count;
+    }
+};
+
+int main() {
+    Solution solution;
+    vector<int> nums;
+    
+    int result = solution.minSwaps(nums);
+    cout << "Minimum number of swaps required: " << result << endl;
+
+    return 0;
+}
