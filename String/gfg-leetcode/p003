@@ -1,0 +1,23 @@
+// Print all the duplicate characters in a string
+// https://www.geeksforgeeks.org/print-all-the-duplicates-in-the-input-string/
+#include <bits/stdc++.h>
+using namespace std;
+void printDups(string str)
+{
+   unordered_map<char,int> mp;
+   for(int i=0;i<str.length();i++){
+        mp[str[i]]++;
+   }
+   for(auto it:mp){
+    if(it.second>1){
+        cout<<it.first<<" "<<it.second<<endl;
+    }
+   }
+}
+/* Driver code*/
+int main()
+{
+    string str = "test string";
+    printDups(str);
+    return 0;
+}
