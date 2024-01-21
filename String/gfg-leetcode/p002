@@ -1,0 +1,47 @@
+// Valid Palindrome
+// https://leetcode.com/problems/valid-palindrome/description/
+#include <string>
+#include<iostream> // Include this if the Solution class is in a separate file
+using namespace std;
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int beg=0;
+        int end=s.length();
+        // int mid=beg-(beg+end)/2;
+        while(beg<end){
+            if(!isalnum(s[beg])){
+                beg++;
+                continue;
+            }
+            if(!isalnum(s[end])){
+                end--;
+                continue;
+            }
+            if(tolower(s[beg])==tolower(s[end])){
+                beg++;
+                end--;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    }
+};
+int main() {
+    Solution sol;
+
+    string s;
+    cout << "Enter a string: ";
+    getline(cin, s);  // Using getline to read the full line including spaces
+
+    bool result = sol.isPalindrome(s);
+    if (result) {
+        cout << "The string is a palindrome." << endl;
+    } else {
+        cout << "The string is not a palindrome." << endl;
+    }
+
+    return 0;
+}
