@@ -1,0 +1,64 @@
+// Aggressive Cows
+// https://www.geeksforgeeks.org/problems/aggressive-cows/0
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    bool canWePlace(vector<int> &stalls, int dist, int cows) {
+        int countCows=1;
+        int lastStall=stalls[0];
+        for(int i=1;i<stalls.size();i++){
+            if(stalls[i]-lastStall >= dist){
+                countCows++;
+                lastStall=stalls[i];;
+            }
+        }
+        if(countCows>=cows){
+                return true;
+            }
+        return false;
+    }
+
+    int solve(int n, int k, vector<int> &stalls) {
+        sort(stalls.begin(),stalls.end());
+        // int n=stalls.size();
+        int beg=1;
+        int high = stalls[n-1]-stalls[0];
+        int ans=0;
+        int mid=(high+beg)/2;
+        while(beg<=high){
+            mid=(high+beg)/2;
+        if(canWePlace(stalls,mid,k)==true){
+            // ans=mid;
+            beg=mid+1;
+        }
+        else{
+            high=mid-1;
+        }
+    }
+    return high;
+    }
+};
+
+int main() {
+    Solution solution;
+
+    int n, k;
+    cout << "Enter the number of stalls: ";
+    cin >> n;
+    cout << "Enter the number of cows: ";
+    cin >> k;
+
+    vector<int> stalls(n);
+    cout << "Enter the positions of stalls: ";
+    for (int i = 0; i < n; ++i) {
+        cin >> stalls[i];
+    }
+
+    int result = solution.solve(n, k, stalls);
+    cout << "The largest minimum distance is: " << result << endl;
+
+    return 0;
+}
