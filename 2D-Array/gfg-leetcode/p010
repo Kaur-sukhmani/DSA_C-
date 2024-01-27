@@ -1,0 +1,61 @@
+// Maximum Difference Between Increasing Elements
+// https://leetcode.com/problems/maximum-difference-between-increasing-elements/description/
+
+#include <iostream>
+#include <vector>
+#include <climits>
+using namespace std;
+
+class Solution {
+public:
+    int maximumDifference(vector<int>& nums) {
+        int mini = INT_MAX;
+        int diff = -1;
+        for (int i = 0; i < nums.size(); i++) {
+            mini = min(mini, nums[i]);
+            if (nums[i] > mini) {
+                diff = max(diff, nums[i] - mini);
+            }
+        }
+        return diff;
+    }
+};
+
+// ANOTHER SOLUTION
+
+// int maximumDifference(vector<int>& nums) {
+//         int diff=-1;
+//         for(int i=0;i<nums.size()-1;i++){
+//             for(int j=i+1;j<nums.size();j++){
+//                 if(diff<(nums[j]-nums[i]) && nums[j]!=nums[i]){
+//                     diff=nums[j]-nums[i];
+//                 }
+//             }
+//         }
+//         return diff;
+//     }
+// };
+
+int main() {
+    // Test cases
+    vector<vector<int>> testCases = {
+        {7, 1, 5, 4},
+        {9, 4, 3, 2},
+        {1, 2, 3, 4, 5},
+        {5, 4, 3, 2, 1}
+    };
+
+    Solution solution;
+
+    for (auto& nums : testCases) {
+        int result = solution.maximumDifference(nums);
+        cout << "Maximum difference in [ ";
+        for (int num : nums) {
+            cout << num << " ";
+        }
+        cout << "] is: " << result << endl;
+    }
+
+    return 0;
+}
+
