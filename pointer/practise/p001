@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+int main(){
+    int num=5;
+    cout<<num<<endl;
+
+    // adderess of operator -&
+    cout<<"Address of num is"<< &num<<endl;
+    int *ptr = &num;
+    cout<<"value is :"<< ptr<<endl;
+
+    double d=4.3;
+    double *p2=&d;
+
+     cout<<"Address is"<< p2<<endl;
+    cout<<"value is :"<< &p2<<endl;
+    
+
+    // to check the size of the interger and the pointer
+    cout<<"Size of integer is "<<sizeof(num)<<endl;
+    cout<<"Size of pointer is "<<sizeof(ptr)<<endl;
+    cout<<"Size of pointer is "<<sizeof(p2)<<endl;
+
+
+
+    return 0;
+}
