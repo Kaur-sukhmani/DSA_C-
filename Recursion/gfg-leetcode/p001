@@ -1,0 +1,33 @@
+// Fibonacci Number
+// https://leetcode.com/problems/fibonacci-number/
+#include <iostream>
+
+class Solution {
+public:
+    int fib(int n) {
+        if (n == 0 || n == 1) {
+            // Base cases: fib(0) = 0, fib(1) = 1
+            return n;
+        } else {
+            // Recursive calculation for Fibonacci number
+            return fib(n - 1) + fib(n - 2);
+        }
+    }
+};
+
+int main() {
+    Solution sol;
+    int n;
+
+    // Test cases
+    n = 2;
+    std::cout << "Fibonacci number at position " << n << ": " << sol.fib(n) << std::endl;
+
+    n = 5;
+    std::cout << "Fibonacci number at position " << n << ": " << sol.fib(n) << std::endl;
+
+    n = 9;
+    std::cout << "Fibonacci number at position " << n << ": " << sol.fib(n) << std::endl;
+
+    return 0;
+}
