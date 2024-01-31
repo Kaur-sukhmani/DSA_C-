@@ -1,0 +1,44 @@
+// Climbing Stairs
+// https://leetcode.com/problems/climbing-stairs/
+// this answer does not solve all the problems
+// since it is the dynamic prog sol so we just did it bec we wnated to take an example of how things work
+
+#include <iostream>
+
+class Solution {
+public:
+    int climbStairs(int n) {
+        if (n < 0) {
+            // If negative, we can't climb, return 0
+            return 0;
+        }
+        if (n == 0) {
+            // If no steps, we're already at the top, return 1
+            return 1;
+        }
+        if (n == 1) {
+            // If only one step, we can climb it in one way
+            return 1;
+        } else {
+            // For other cases, we can climb from (n-1) or (n-2) steps
+            return climbStairs(n - 1) + climbStairs(n - 2);
+        }
+    }
+};
+
+int main() {
+    Solution sol;
+    int n;
+
+    // Test cases
+    n = 2;
+    std::cout << "Number of ways to climb " << n << " steps: " << sol.climbStairs(n) << std::endl;
+
+    n = 3;
+    std::cout << "Number of ways to climb " << n << " steps: " << sol.climbStairs(n) << std::endl;
+
+    n = 5;
+    std::cout << "Number of ways to climb " << n << " steps: " << sol.climbStairs(n) << std::endl;
+
+    return 0;
+}
