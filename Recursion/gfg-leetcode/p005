@@ -14,9 +14,15 @@ bool isSorted(int arr[],int size){
     }
 }
 int main(){
-    int arr[5]={2,4,6,8,9};
-    int size=5;
+    int main() {
+    int arr[5] = {2, 4, 6, 8, 9};
+    int size = 5;
 
-    bool ans=isSorted(arr,size);
+    bool ans = isSorted(arr, size);
+    if (ans) {
+        cout << "The array is sorted." << endl;
+    } else {
+        cout << "The array is not sorted." << endl;
+    }
     return 0;
 }
