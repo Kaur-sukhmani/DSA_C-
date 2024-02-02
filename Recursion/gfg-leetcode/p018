@@ -1,0 +1,57 @@
+// https://www.geeksforgeeks.org/problems/permutations-of-a-given-string2041/1?utm_source=geeksforgeeks&utm_medium=article_practice_tab&utm_campaign=article_practice_tab
+// Permutations of a given string
+//{ Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+class Solution
+{
+	public:
+    void solve(string& S, vector<string>& ans, int index) {
+    if (index == S.length() - 1) {
+        ans.push_back(S);
+        return;
+    }
+    unordered_set<char> seen;
+    for (int j = index; j < S.length(); j++) {
+        if (seen.find(S[j]) == seen.end()) {
+            seen.insert(S[j]);
+            swap(S[index], S[j]);
+            solve(S, ans, index + 1);
+            // Backtracking
+            swap(S[index], S[j]);
+        }
+    }
+    }
+    vector<string> find_permutation(string S) {
+        vector<string> ans;
+        int index = 0;
+        solve(S, ans, index);
+        return ans;
+    }
+};
+
+
+
+//{ Driver Code Starts.
+int main(){
+    int t;
+    cin >> t;
+    while(t--)
+    {
+	    string S;
+	    cin >> S;
+	    Solution ob;
+	    vector<string> ans = ob.find_permutation(S);
+	    sort(ans.begin(),ans.end());
+	    for(auto i: ans)
+	    {
+	    	cout<<i<<" ";
+	    }
+	    cout<<"\n";
+    }
+	return 0;
+}
+
+// } Driver Code Ends
