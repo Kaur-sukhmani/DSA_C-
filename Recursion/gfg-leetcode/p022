@@ -1,0 +1,82 @@
+// 40. Combination Sum II
+(* https://leetcode.com/problems/combination-sum-ii/description/ *)
+/*Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates where the candidate numbers sum to target.
+
+Each number in candidates may only be used once in the combination.
+
+Note: The solution set must not contain duplicate combinations.
+
+ 
+
+Example 1:
+
+Input: candidates = [10,1,2,7,6,1,5], target = 8
+Output: 
+[
+[1,1,6],
+[1,2,5],
+[1,7],
+[2,6]
+]
+*/
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class Solution {
+public:
+    void combination(vector<vector<int>>& ans, vector<int>& v, vector<int>& candidates, int target, int idx) {
+        if (target == 0) {
+            ans.push_back(v);
+            return;
+        }
+
+        for (int i = idx; i < candidates.size(); ++i) {
+            // Skip duplicates
+            if (i > idx && candidates[i] == candidates[i - 1]) continue;
+            
+            // If current candidate exceeds target, break
+            if (candidates[i] > target) break;
+
+            // Add current candidate to combination
+            v.push_back(candidates[i]);
+
+            // Recursive call for next index with reduced target
+            combination(ans, v, candidates, target - candidates[i], i + 1);
+
+            // Backtrack
+            v.pop_back();
+        }
+    }
+
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(), candidates.end());
+        vector<vector<int>> ans;
+        vector<int> v;
+        combination(ans, v, candidates, target, 0);
+        return ans;
+    }
+};
+
+int main() {
+    // Example usage:
+    Solution sol;
+    vector<int> candidates = {10, 1, 2, 7, 6, 1, 5};
+    int target = 8;
+
+    vector<vector<int>> result = sol.combinationSum2(candidates, target);
+
+    // Printing the result
+    cout << "Result:" << endl;
+    for (const auto& combination : result) {
+        cout << "[";
+        for (int num : combination) {
+            cout << num << ", ";
+        }
+        cout << "]" << endl;
+    }
+
+    return 0;
+}
