@@ -1,0 +1,149 @@
+// Creation of the Singly Linked List 
+#include<iostream>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    // constructor 
+    Node (int data){
+        this->data=data;
+        this->next=next;
+    }
+    // destructor
+    ~Node(){
+        int value=this->data;
+        if(this->next!=NULL){
+            delete next;
+            next=NULL;
+        }
+        cout<<"memory is free for node with data "<<value<<endl;
+    }
+};
+void InsertAtHead(Node* &head,int d){
+        // New node create 
+        Node* temp =new Node(d);
+        temp->next=head;
+        head=temp;
+}
+void InsertAtTail(Node* &tail,int d){
+        // New node create 
+        Node* new_node=new Node(d);
+        tail->next=new_node;
+        new_node->next=NULL;
+        tail=new_node;
+        
+}
+void InsertAtMiddle(Node* &tail,Node* &head,int position,int d){
+    Node *temp=head;
+    Node *newNode=new Node(d);
+    if(position==1){
+        InsertAtHead(head, d);
+        return ;
+    }
+    // Inserting at Last Positiom 
+    if(temp->next==NULL){
+        InsertAtTail(tail,d);
+    }
+    // Node *prevNode=NULL;
+    int count=1;
+    while(count<position-1){
+
+        temp=temp->next;
+        count++;
+    }
+
+    // creating a node for d 
+    newNode->next=temp->next;
+    temp->next=newNode;
+
+
+
+
+}
+void deleteNode(int position , Node* &head){
+    // deleting first or start node
+    if(position == 1) {
+        Node* temp = head;
+        head = head -> next;
+        //memory free start ndoe
+        temp -> next = NULL;
+        delete temp;
+    }
+    else
+    {
+        //deleting any middle node or last node
+        Node* curr = head;
+        Node* prev = NULL;
+
+        int cnt = 1;
+        while(cnt < position) {
+            prev = curr;
+            curr = curr -> next;
+            cnt++;
+        }
+
+        prev -> next = curr -> next;
+        curr -> next  = NULL;
+        delete curr;
+
+    }
+}
+void print(Node* &head){
+    Node* temp=head;
+
+    while(temp!=NULL){
+        cout<<temp->data<<endl;
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+/*
+output 
+12
+10
+
+15
+12
+10
+*/
+int main(){
+    // created a new node
+    Node* node1 = new Node(10);
+    cout<< node1->data<<endl;
+    cout<<node1->next<<endl;
+    
+    // head pointed to node1
+    Node* head = node1;
+    Node* tail = node1;
+    print(head);
+
+    // InsertAtHead(head,12);
+
+    // print(head);
+
+    // InsertAtHead(head,15);
+    // print(head);
+       
+    /*Inserting and printing at the end 
+    */
+
+    InsertAtTail(tail,12);
+
+    print(head);
+
+    InsertAtTail(tail,15);
+    print(head);
+
+    InsertAtMiddle(tail,head, 2, 22);
+    print(head);
+
+    cout<<"head"<<head->data<<endl;
+    cout<<"tail"<<tail->data<<endl;
+
+    // deleting node 
+    deleteNode(2,head);
+    print(head);
+   return 0;
+}
