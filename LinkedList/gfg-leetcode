@@ -1,0 +1,61 @@
+// reverse a linked List
+// https://leetcode.com/problems/reverse-linked-list/
+/*
+Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+ 
+
+Example 1:
+
+
+Input: head = [1,2,3,4,5]
+Output: [5,4,3,2,1]
+*/
+#include <iostream>
+
+// Definition for singly-linked list
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode* next) : val(x), next(next) {}
+};
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+        ListNode* next = nullptr;
+        while (curr != nullptr) {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+        return head;
+    }
+};
+
+int main() {
+    // Create a sample linked list
+    ListNode* head = new ListNode(1);
+    head->next = new ListNode(2);
+    head->next->next = new ListNode(3);
+
+    // Create an instance of the Solution class
+    Solution solution;
+
+    // Reverse the linked list
+    ListNode* reversedList = solution.reverseList(head);
+
+    // Print the reversed list
+    while (reversedList != nullptr) {
+        std::cout << reversedList->val << " ";
+        reversedList = reversedList->next;
+    }
+
+    return 0;
+}
