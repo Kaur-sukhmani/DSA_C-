@@ -1,0 +1,57 @@
+//  Middle of the Linked List
+// https://leetcode.com/problems/middle-of-the-linked-list/description/
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        //to find the midddle element in the linde
+        ListNode* temp=head;
+        int length=0;
+        while(temp!=NULL){
+            temp=temp->next;
+            length=length+1;
+        }
+        int middle=length/2;
+        ListNode* temp2=head;
+        while(middle!=0){
+            middle--;
+            temp2=temp2->next;
+        }
+        head=temp2;
+        return head;
+    }
+};
+/*
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+// 2nd method 
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        //to find the midddle element in the linde
+        ListNode* fast=head;
+        ListNode* slow=head;
+        while(fast != nullptr && fast->next != nullptr){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        return slow;
+    }
+    */
