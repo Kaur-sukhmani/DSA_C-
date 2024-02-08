@@ -1,0 +1,53 @@
+// Linked List Cycle
+// https://leetcode.com/problems/linked-list-cycle/description/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+// one oslutio  not optimized having TC->O(nlogn)
+                    //              SC->O(n)
+        bool hasCycle(ListNode *head) {
+            map<ListNode*, int> check;
+            ListNode* temp = head;
+
+            while (temp != NULL) {
+                if (check.find(temp) != check.end()) {
+                    // If the node is already in the map, a cycle is detected.
+                    return true;
+                } else {
+                    // Add the current node to the map.
+                    check[temp] = 1;
+                    // Move to the next node.
+                    temp = temp->next;
+                }
+            }
+            // If we reach here, there is no cycle.
+            return false;
+    }
+};
+/*Optimised Solution->using Floyds solution */
+class Solution {
+public:
+        bool hasCycle(ListNode *head) {
+            if(head==nullptr || head->next==nullptr){
+                return false;
+            }
+            ListNode* slow=head;
+            ListNode* fast=head;
+            while(fast!=NULL && fast->next!=NULL){
+                slow=slow->next;
+                fast=fast->next->next;
+                if(slow==fast){
+                    return true;
+                }
+            }
+            return false;
+    }
+};
