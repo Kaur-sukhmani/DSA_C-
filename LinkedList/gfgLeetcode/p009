@@ -1,125 +1,86 @@
-// Given a linked list of 0s, 1s and 2s, sort it
-// https://www.geeksforgeeks.org/problems/given-a-linked-list-of-0s-1s-and-2s-sort-it/1?utm_source=geeksforgeeks&utm_medium=ml_article_practice_tab&utm_campaign=article_practice_tab
+// detectimg loop
+// finding the starting node of the loop
+// removing the loop
+// 
+/*************************************************
+    
+    class Node {
+        public :
 
-//{ Driver Code Starts
-#include <bits/stdc++.h>
+        int data;
+        Node *next;
 
-using namespace std;
-/* Link list Node */
-struct Node {
-    int data;
-    struct Node *next;
-    Node(int x) {
-        data = x;
-        next = NULL;
+        Node(int data) {
+            this -> data = data;
+            this -> next = NULL;
+        }
+    };
+
+*************************************************/
+
+Node* floydDetectLoop(Node* head) {
+
+    if(head == NULL)
+        return NULL;
+
+    Node* slow = head;
+    Node* fast = head;
+
+    while(slow != NULL && fast !=NULL) {
+        
+        fast = fast -> next;
+        if(fast != NULL) {
+            fast = fast -> next;
+        }
+
+        slow = slow -> next;
+
+        if(slow == fast) {
+            return slow;
+        }
     }
-};
 
-struct Node *start = NULL;
+    return NULL;
 
+}
 
-// } Driver Code Ends
-/*
- 
-  Node is defined as
-  struct Node {
-    int data;
-    struct Node *next;
-  i  Node(int x) {
-        data = x;
-        next = NULL;
-    }
-};
+Node* getStartingNode(Node* head) {
 
-*/
-class Solution
+    if(head == NULL) 
+        return NULL;
+
+    Node* intersection = floydDetectLoop(head);
+    
+    if(intersection == NULL)
+        return NULL;
+    
+    Node* slow = head;
+
+    while(slow != intersection) {
+        slow = slow -> next;
+        intersection = intersection -> next;
+    }  
+
+    return slow;
+
+}
+
+Node *removeLoop(Node *head)
 {
-    public:
-    //Function to sort a linked list of 0s, 1s and 2s.
-    Node* segregate(Node *head) {
-        
-        // Add code here
-        if(head==NULL || head->next==NULL){
-            return head;
-        }
-        map<int,int> mp;
-        Node* temp1=head;
-        while(temp1!=NULL){
-            mp[temp1->data]++;
-             temp1 = temp1->next;
-        }
-        Node* temp=NULL;
-        Node* head_temp=NULL;
-        for(auto it = mp.begin(); it != mp.end(); ++it) {
-        int value = it->first;
-        int frequency = it->second;
-        
-        for(int i = 0; i < frequency; ++i) {
-            if(temp == NULL) {
-                Node* NewNode = new Node(value);
-                temp = NewNode;
-                head_temp = temp;
-            } else {
-                Node* NewNode = new Node(value);
-                temp->next = NewNode;
-                temp = temp->next;
-            }
-        }
-    }
-    return head_temp;
-        
-    }
-};
+    if( head == NULL)
+        return NULL;
 
+    Node* startOfLoop = getStartingNode(head);
+    
+    if(startOfLoop == NULL)
+        return head;
+    
+    Node* temp = startOfLoop;
 
-//{ Driver Code Starts.
+    while(temp -> next != startOfLoop) {
+        temp = temp -> next;
+    } 
 
-// Function to sort a linked list of 0s, 1s and 2s
-void printList(struct Node *Node) {
-    while (Node != NULL) {
-        printf("%d ", Node->data);
-        Node = Node->next;
-    }
-    printf("\n");
+    temp -> next = NULL;
+    return head;
 }
-
-/* Drier program to test above function*/
-void insert(int n1) {
-    int n, value, i;
-    // scanf("%d",&n);
-    n = n1;
-    struct Node *temp;
-    for (i = 0; i < n; i++) {
-        scanf("%d", &value);
-
-        if (i == 0) {
-            start = new Node(value);
-            temp = start;
-            continue;
-        } else {
-            temp->next = new Node(value);
-            temp = temp->next;
-            temp->next = NULL;
-        }
-    }
-}
-
-int main() {
-
-    int n;
-
-    int t;
-    scanf("%d", &t);
-
-    while (t--) {
-        scanf("%d", &n);
-
-        insert(n);
-        Solution ob;
-        struct Node *newHead = ob.segregate(start);
-        printList(newHead);
-    }
-
-    return 0;
-}
-// } Driver Code Ends
