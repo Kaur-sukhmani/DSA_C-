@@ -1,0 +1,59 @@
+//  Palindrome Linked List
+// https://leetcode.com/problems/palindrome-linked-list/description/
+
+/*
+Given the head of a singly linked list, return true if it is a 
+palindrome
+ or false otherwise.
+
+ 
+
+Example 1:
+
+
+Input: head = [1,2,2,1]
+Output: true
+*/
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+/*SOLUTION 1 ->using satck */
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        stack<int> sck;
+        ListNode* temp = head;
+
+        // Push all elements onto the stack
+        while (temp != nullptr) {
+            sck.push(temp->val);
+            temp = temp->next;
+        }
+// Reset temp to the beginning of the list
+        temp = head;
+        while (temp != nullptr && !sck.empty()) {
+            if (temp->val != sck.top()) {
+                return false; // Not a palindrome
+            }
+            sck.pop();
+            temp = temp->next;
+        }
+
+        // If the stack is empty, it means the list is a palindrome
+        return sck.empty();
+    }
+};
+// TC-O(N)
+// SC->O(N)
+
+// 
