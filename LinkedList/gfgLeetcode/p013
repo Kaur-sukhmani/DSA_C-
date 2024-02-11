@@ -1,0 +1,59 @@
+// Palindrome Linked List->Optimal Solution 
+// https://leetcode.com/problems/palindrome-linked-list/description/
+
+
+class Solution {
+public:
+    void reverse(ListNode*& head){
+        ListNode* next = NULL;
+        ListNode* curr = head;
+        ListNode* prev = NULL;
+
+        while(curr != NULL){
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev; // Update the head to the new head after reversing
+    }
+
+    int findMiddle(ListNode* head){
+        ListNode* slow = head;
+        ListNode* fast = head;
+        int count = 0; // Initialize count
+        while(fast != NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+            count++;
+        }
+        return count;
+    }
+
+    bool isPalindrome(ListNode* head) {
+        if(head == NULL || head->next == NULL){
+            return true; // Base case: empty or single-node list is a palindrome
+        }
+        
+        int count = findMiddle(head);
+        ListNode* temp = head;
+        while(count != 0){
+            temp = temp->next;
+            count--;
+        }
+
+        reverse(temp); // Reverse the second half of the list
+
+        // Compare the two halves
+        ListNode* p1 = head;
+        ListNode* p2 = temp;
+        while(p2 != NULL){
+            if(p1->val != p2->val){
+                return false; // Not a palindrome
+            }
+            p1 = p1->next;
+            p2 = p2->next;
+        }
+        return true; // Palindrome
+    }
+};
