@@ -1,6 +1,9 @@
 // Morris Traversal -> level order traversal without using stack anf recursive call
 // https://leetcode.com/problems/binary-tree-inorder-traversal/
 //https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/
+
+
+// using threaded binary tree
 #include <bits/stdc++.h>
 using namespace std;
  
