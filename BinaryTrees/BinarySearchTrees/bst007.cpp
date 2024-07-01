@@ -66,6 +66,9 @@ bool twoSumInBST(BinaryTreeNode<int>* root, int target) {
     return false; // No such pair found
 }
 
+Time Complexity: O(n) for both inorder traversal and twoSumInBST function.
+Space Complexity: O(n) for both inorder traversal and twoSumInBST function.
+
 
 /*SOLUTION 2*/
 class Solution {
