@@ -51,24 +51,28 @@ public:
             int c = q.front().second;
             q.pop();
 
-            // Traverse in the four cardinal directions
-            vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-            for (auto dir : directions) {
-                int nrow = r + dir.first;
-                int ncol = c + dir.second;
-                if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && grid[nrow][ncol] == '1' && !vis[nrow][ncol]) {
-                    vis[nrow][ncol] = 1;
-                    q.push({nrow, ncol});
+            // Traverse in the neighbours and mark them if it's land
+            for (int delrow = -1; delrow <= 1; delrow++) {
+                for (int delcol = -1; delcol <= 1; delcol++) {
+                    int nrow = r + delrow;
+                    int ncol = c + delcol;
+                    if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && grid[nrow][ncol] == '1' && !vis[nrow][ncol]) {
+                        vis[nrow][ncol] = 1;
+                        q.push({nrow, ncol});
+                    }
                 }
             }
         }
     }
+
 
     int numIslands(vector<vector<char>> &grid) {
         int n = grid.size();
         int m = grid[0].size();
         int cnt = 0;
         vector<vector<int>> vis(n, vector<int>(m, 0));
+
+
 
         for (int row = 0; row < n; row++) {
             for (int col = 0; col < m; col++) {
