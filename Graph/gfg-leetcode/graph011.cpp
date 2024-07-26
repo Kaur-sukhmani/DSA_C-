@@ -1,4 +1,5 @@
 // Number of Enclaves
+
 // https://leetcode.com/problems/number-of-enclaves/description/
 /*
  Number of Enclaves
