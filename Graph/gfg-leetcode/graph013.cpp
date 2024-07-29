@@ -1,6 +1,8 @@
+
 /*
 Bipartite Graph using BFS
-https://www.geeksforgeeks.org/problems/bipartite-graph/1
+https://www.geeksforgeeks.org/problems/bipartite-graph/1\
+https://leetcode.com/problems/is-graph-bipartite/
 
 Given an adjacency list of a graph adj of V no. of vertices having 0 based index. Check whether the graph is bipartite or not.
 
