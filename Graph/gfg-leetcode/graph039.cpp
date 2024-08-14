@@ -3,6 +3,7 @@
 using namespace std;
 
 
+
 class DisjointSet {
     vector<int> rank, parent, size;
 
