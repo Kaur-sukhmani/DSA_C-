@@ -81,3 +81,51 @@ vector<vector<int>> nearest(vector<vector<int>>& grid) {
 };
 // TC->O(N*M)+O(N*M*4)
 // SC->O(N*M)+O(N*M)
+
+
+
+//2nd method ->
+class Solution {
+public:
+    vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
+        int n = mat.size();
+        int m = mat[0].size();
+        vector<vector<int>> dist(n, vector<int>(m, INT_MAX));
+        queue<pair<pair<int, int>, int>> q;
+        
+        // Initialize the queue with all cells having 0 and their distance as 0
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (mat[i][j] == 0) {
+                    dist[i][j] = 0;
+                    q.push({{i, j}, 0});
+                }
+            }
+        }
+        
+        int dr[4] = {-1, 0, 1, 0};
+        int dc[4] = {0, -1, 0, 1};
+        
+        while (!q.empty()) {
+            int row = q.front().first.first;
+            int col = q.front().first.second;
+            int currDist = q.front().second; // current distance from the nearest 0
+            q.pop();
+            
+            for (int i = 0; i < 4; i++) {
+                int fr = row + dr[i];
+                int fc = col + dc[i];
+                
+                if (fr >= 0 && fr < n && fc >= 0 && fc < m) {
+                    // If the new distance is shorter, update and push to queue
+                    if (dist[fr][fc] > currDist + 1) {
+                        dist[fr][fc] = currDist + 1;
+                        q.push({{fr, fc}, dist[fr][fc]});
+                    }
+                }
+            }
+        }
+        
+        return dist;
+    }
+};
